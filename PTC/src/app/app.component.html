@@ -1,0 +1,27 @@
+<div class="container">
+  <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <a class="navbar-brand" routerLink="/dashboard">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navItems"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navItems">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" *ngIf="securityObject!.isAuthenticated" routerLink="/products">Products</a>
+        <a class="nav-item nav-link" *ngIf="canAccessCategories" routerLink="/categories">Categories</a>
+        <a class="nav-item nav-link" *ngIf="canAccessSettings" routerLink="/settings">Settings</a>
+        <a class="nav-item nav-link" *ngIf="canAccessLogs" routerLink="/logmaintenance">Logs</a>
+      </div>
+      <div class="navbar-nav ml-auto">
+        <a class="nav-item nav-link text-right" *ngIf="!securityObject!.isAuthenticated" routerLink="/login">Login</a>
+        <a class="nav-item nav-link" *ngIf="securityObject!.isAuthenticated" href="#" (click)="logout()">
+          Logout {{securityObject!.userName}}
+        </a>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div class="container body-content">
+  <router-outlet></router-outlet>
+</div>
